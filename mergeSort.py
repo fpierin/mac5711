@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Author:	Felipe Pierin
-# Title:	Selecion Sort
+# Title:	MergeSort
 #
 # Statement:
 # Given a disordered list of integers rearrange it in natural order.
