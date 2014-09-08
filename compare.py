@@ -13,5 +13,9 @@
 # Worst		-> O(n^2)
 
 def cmp(a, b, c, d):
-	a.append([b, c])
-	return d
+    if (b < c):
+        e = '<'
+    else:
+        e = '>'
+    a.append([e, b, c])
+    return d
