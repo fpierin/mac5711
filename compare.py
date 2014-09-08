@@ -12,15 +12,6 @@
 # Average	-> O(n^2)
 # Worst		-> O(n^2)
 
-from compare import cmp
-
-def insertionsort(a):
-	c = []
-	for i in range(1, len(a)):
-		tmp = a[i]
-		k = i
-		while k > 0 and cmp(c, tmp, a[k-1], (tmp < a[k-1])):
-			a[k] = a[k-1]
-			k -= 1
-		a[k] = tmp
-	return c
+def cmp(a, b, c, d):
+	a.append([b, c])
+	return d
