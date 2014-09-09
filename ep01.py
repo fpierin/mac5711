@@ -45,15 +45,19 @@ class Node:
 					self.right = Node(None)
 				self.right.merge(branch[1:])
 		return self
-	
-	def show(self):
-		if (self.left is not None):
-			self.left.show()
+
+	def tree(self, i):
+		x = ""
+		for z in range(i):
+			x += "  "
 		if (self.value is not None):
-			print "+---+"
-			print self.value
+			x += "|-" + self.value
+			i += 1
+		if (self.left is not None):
+			x += "\n" + self.left.tree(i)
 		if (self.right is not None):
-			self.right.show()
+			x += "\n" + self.right.tree(i)
+		return x
 
 def make(root, branch):    
     if root is None:
@@ -70,7 +74,7 @@ def maketree(branches):
     root = Node(None)
     for branch in branches:
 		root = make(root, branch)
-		print "root -> ", root.value
+#		print "root -> ", root.value
 
     return root
 
@@ -103,9 +107,11 @@ def main(argv):
 	
 	l = range(0, n)
 	r = roads(l, a)
-	
+
+	print ""	
 	t = maketree(r)
-	t.show()
+	x = t.tree(0)
+	print x
 	print ""
 
 if __name__ == "__main__":
