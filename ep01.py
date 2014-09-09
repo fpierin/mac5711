@@ -18,26 +18,42 @@ from insertionSort import insertionsort
 from selectionSort import selectionsort
 
 class Node:
-    def __init__(self, value):
-        self.left = None
-        self.right = None
-        self.value = value
+	def __init__(self, value):
+		self.left = None	
+		self.right = None	
+		self.value = value
+	
+	def merge(self, branch):
+		print "branch --> ", branch
+		if branch:
+			triple = branch[0]
+			value = str(triple[1]) + ":" + str(triple[2])
+			signal = triple[0]
+			node = Node(value)
 
-    def merge(self, branch):
-        triple = branch[0]
-        value = str(triple[1]) + ":" + str(triple[2])
-        signal = triple[0]
-        if self.value == None:
-           self.value = value
-           
+			if self.value == None:
+				self.value = value
+			elif self.value != value:
+				print "diferente ", value
 
-
-    def show(self):
-        print self.value
-        if not (self.left is None):
-            self.left.show()
-        if not (self.right is None):
-            self.right.show()
+			if signal == "<":
+				if (self.left == None):
+					self.left = Node(None)
+				self.left.merge(branch[1:])
+			elif signal == ">":
+				if (self.right == None):
+					self.right = Node(None)
+				self.right.merge(branch[1:])
+		return self
+	
+	def show(self):
+		if (self.left is not None):
+			self.left.show()
+		if (self.value is not None):
+			print "+---+"
+			print self.value
+		if (self.right is not None):
+			self.right.show()
 
 def make(root, branch):    
     if root is None:
@@ -53,10 +69,10 @@ def maketree(branches):
 
     root = Node(None)
     for branch in branches:
-	root = make(root, branch)
+		root = make(root, branch)
+		print "root -> ", root.value
 
-    if root is not None:
-        root.show()
+    return root
 
 def roads(dl, al):
     r = []
@@ -78,19 +94,19 @@ def roads(dl, al):
     return r;
 		
 def main(argv):
-    n = int(argv[0])
-    a = str(argv[1]).lower()
-    
-    print ""
-    print "A: ", a
-    print "N: ", n
-    print ""
+	n = int(argv[0])
+	a = str(argv[1]).lower()
+	print ""
+	print "A: ", a
+	print "N: ", n
+	print ""
 	
-    l = range(0, n)
-    r = roads(l, a)
-
-    maketree(r)
-    print ""
+	l = range(0, n)
+	r = roads(l, a)
+	
+	t = maketree(r)
+	t.show()
+	print ""
 
 if __name__ == "__main__":
    main(sys.argv[1:])
