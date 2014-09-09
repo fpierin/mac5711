@@ -27,15 +27,16 @@ class Node:
 		print "branch --> ", branch
 		if branch:
 			triple = branch[0]
-			value = str(triple[1]) + ":" + str(triple[2])
 			signal = triple[0]
-			node = Node(value)
+#			node = Node(value)
 
 			if self.value == None:
+				value = str(triple[1]) + ":" + str(triple[2])
 				self.value = value
-			elif self.value != value:
-				print "diferente ", value
-
+			elif signal == "=":
+				print "triple ", triple
+				value = str(triple[1])
+				self.value = value
 			if signal == "<":
 				if (self.left == None):
 					self.left = Node(None)
@@ -44,19 +45,24 @@ class Node:
 				if (self.right == None):
 					self.right = Node(None)
 				self.right.merge(branch[1:])
+
 		return self
 
 	def tree(self, i):
 		x = ""
-		for z in range(i):
-			x += "  "
-		if (self.value is not None):
+		if (self.value != None and self.value.strip() != ""):
+			for z in range(i):
+				x += "  "
 			x += "|-" + self.value
 			i += 1
 		if (self.left is not None):
-			x += "\n" + self.left.tree(i)
+			lvalue = self.left.tree(i)
+			if lvalue != None and lvalue != "":
+				x += "\n" + self.left.tree(i)
 		if (self.right is not None):
-			x += "\n" + self.right.tree(i)
+			rvalue = self.right.tree(i)
+			if rvalue != None and rvalue != "":
+				x += "\n" + self.right.tree(i)
 		return x
 
 def make(root, branch):    
@@ -67,34 +73,37 @@ def make(root, branch):
 		
 
 def maketree(branches):
-    print ""
-    print branches
-    print ""
+#    print ""
+#    print branches
+#    print ""
 
     root = Node(None)
     for branch in branches:
-		root = make(root, branch)
-#		print "root -> ", root.value
+			root = make(root, branch)
 
     return root
 
 def roads(dl, al):
-    r = []
-    for p in itertools.permutations(dl):
-    	l = list(p)
+	r = []
+	for p in itertools.permutations(dl):
+		l = list(p)
 	branch = list(l)
 	o = globals()[al](l)
 	d = []
 	for x in o:
-            h = []
-	    for y in x:
-	        if (str(y) == "<" or str(y) == ">"):
-                    h.append(y)
-                else:
-                    h.append(branch.index(y))
-	    d.append(h)
+		h = []
+		for y in x:
+			if (str(y) == "<" or str(y) == ">"):
+				h.append(y)
+			else:
+				h.append(branch.index(y))
+	    	d.append(h)
+	    z = ""
+			for h in range(len(dl)):
+				z += str(dl.index(h))
+			d.append(['=',z])
 	r.append(d)
-	print branch, " -> ", d
+
     return r;
 		
 def main(argv):
@@ -107,6 +116,7 @@ def main(argv):
 	
 	l = range(0, n)
 	r = roads(l, a)
+	print "roads ", r
 
 	print ""	
 	t = maketree(r)
