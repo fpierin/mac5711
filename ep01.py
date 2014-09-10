@@ -16,6 +16,7 @@ import itertools
 
 from insertionSort import insertionsort
 from selectionSort import selectionsort
+from heapSort import heapsort
 from mergeSort import mergesort
 
 class Node:

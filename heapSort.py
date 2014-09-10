@@ -12,37 +12,36 @@
 # Average	-> O(n*log(n))
 # Worst		-> O(n*log(n))
 
-def HeapSort(A):
-	def heapify(A):
+from compare import cmp
+
+def heapsortCmp(c, A):
+
+	def heapify(c, A):
 		start = (len(A) -2) / 2
 		while (start >= 0):
-				fixdown(A, start, len(A) - 1)
+				fixdown(c, A, start, len(A) - 1)
 				start -= 1
 	
-	def fixdown(A, start, end):
+	def fixdown(c, A, start, end):
 		root = start
 		while root * 2 + 1 <= end:
 			child = root * 2 + 1
-			if (child + 1 <= end and A[child] < A[child + 1]):
+			if (child + 1 <= end and cmp(c, A[child], A[child + 1], (A[child] < A[child + 1]))):
 				child += 1
-			if (child <= end and A[root] < A[child]:
+			if (child <= end and cmp(c, A[root], A[child], (A[root] < A[child]))):
 				A[root], A[child] = A[child], A[root]
 				root = child
 			else:
 				return
 
-	heapify(A)
+	heapify(c, A)
 	end = len(A) - 1
 	while end > 0:
 		A[end], A[0] = A[0], A[end]
-		fixdown(A, 0, end -1)
+		fixdown(c, A, 0, end -1)
 		end -= 1
-		
 
-def main():
-	A = [18,5,100,3,1,19,6,0,7,4,2]
-	B = HeapSort(A)
-	print B
-
-if __name__ == "__main__":
-	main()
+def heapsort(A):
+	c = []
+	x = heapsortCmp(c, A)
+	return c
