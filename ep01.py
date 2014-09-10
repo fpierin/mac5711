@@ -16,6 +16,7 @@ import itertools
 
 from insertionSort import insertionsort
 from selectionSort import selectionsort
+from mergeSort import mergesort
 
 class Node:
 	def __init__(self, value):
@@ -24,18 +25,17 @@ class Node:
 		self.value = value
 	
 	def merge(self, branch):
-		print "branch --> ", branch
+#		print "branch --> ", branch
 		if branch:
 			triple = branch[0]
 			signal = triple[0]
 #			node = Node(value)
 
-			if self.value == None:
-				value = str(triple[1]) + ":" + str(triple[2])
-				self.value = value
-			elif signal == "=":
-				print "triple ", triple
+			if signal == "=":
 				value = str(triple[1])
+				self.value = value
+			elif self.value == None:
+				value = str(triple[1]) + ":" + str(triple[2])
 				self.value = value
 			if signal == "<":
 				if (self.left == None):
@@ -53,7 +53,7 @@ class Node:
 		if (self.value != None and self.value.strip() != ""):
 			for z in range(i):
 				x += "  "
-			x += "|-" + self.value
+			x += "|---" + self.value
 			i += 1
 		if (self.left is not None):
 			lvalue = self.left.tree(i)
@@ -83,28 +83,29 @@ def maketree(branches):
 
     return root
 
-def roads(dl, al):
-	r = []
-	for p in itertools.permutations(dl):
-		l = list(p)
-	branch = list(l)
-	o = globals()[al](l)
-	d = []
-	for x in o:
-		h = []
-		for y in x:
-			if (str(y) == "<" or str(y) == ">"):
-				h.append(y)
-			else:
-				h.append(branch.index(y))
-	    	d.append(h)
-	    z = ""
-			for h in range(len(dl)):
-				z += str(dl.index(h))
-			d.append(['=',z])
-	r.append(d)
-
-    return r;
+def roads(defaultList, al):
+	roadList = []
+	for p in itertools.permutations(defaultList):
+		permutation = list(p)
+		z = ""
+		print "p ", permutation
+		for j in range(len(defaultList)):
+			z += str(permutation.index(j))
+			
+		branch = list(permutation)
+		compareList = globals()[al](permutation)
+		d = []
+		for compare in compareList:
+			h = []
+			for value in compare:
+				if (str(value) == "<" or str(value) == ">"):
+					h.append(value)			
+				else:
+					h.append(branch.index(value))
+			d.append(h)
+		d.append(['=',z])
+		roadList.append(d)
+	return roadList;
 		
 def main(argv):
 	n = int(argv[0])
