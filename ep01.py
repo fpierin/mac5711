@@ -50,10 +50,12 @@ class Node:
 
 	def tree(self, i):
 		x = ""
+		l = "-"
 		if (self.value != None and self.value.strip() != ""):
 			for z in range(i):
 				x += "  "
-			x += "|---" + self.value
+				l += "-"
+			x += "|" + l + self.value
 			i += 1
 		if (self.left is not None):
 			lvalue = self.left.tree(i)
@@ -88,7 +90,7 @@ def roads(defaultList, al):
 	for p in itertools.permutations(defaultList):
 		permutation = list(p)
 		z = ""
-		print "p ", permutation
+#		print "p ", permutation
 		for j in range(len(defaultList)):
 			z += str(permutation.index(j))
 			
@@ -117,7 +119,7 @@ def main(argv):
 	
 	l = range(0, n)
 	r = roads(l, a)
-	print "roads ", r
+#	print "roads ", r
 
 	print ""	
 	t = maketree(r)
