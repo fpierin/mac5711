@@ -14,10 +14,11 @@
 import sys
 import itertools
 
-from insertionSort import insertionsort
-from selectionSort import selectionsort
+from quickSort import quicksort
 from heapSort import heapsort
+from insertionSort import insertionsort
 from mergeSort import mergesort
+from selectionSort import selectionsort
 
 class Node:
 	def __init__(self, value):

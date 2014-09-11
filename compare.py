@@ -15,7 +15,9 @@
 def cmp(a, b, c, d):
     if (b < c):
         e = '<'
-    else:
+    elif (b > c):
         e = '>'
+    else:
+    	return
     a.append([e, b, c])
     return d
