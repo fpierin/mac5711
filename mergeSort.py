@@ -1,16 +1,7 @@
 #!/usr/bin/env python
 #
 # Author:	Felipe Pierin
-# Title:	MergeSort
-#
-# Statement:
-# Given a disordered list of integers rearrange it in natural order.
-#
-# Time complexity of solution:
-# 
-# Best		-> O(n*log(n))
-# Average	-> O(n*log(n))
-# Worst		-> O(n*log(n))
+# Author:	Viviane Bonadia
 
 from compare import cmp
 

@@ -1,15 +1,7 @@
 #!/usr/bin/env python
 #
-# Author: Felipe Lombardi Pierin
-# Nusp:	5875242
-
-#             hello
-#       +---------------+
-#       1               1
-#   +-------+       +-------+
-#   2       3       2       3
-# +---+   +---+   +---+   +---+
-# 4   5       6   4   5       6
+# Author:	Felipe Pierin
+# Author:	Viviane Bonadia
 
 import sys
 import itertools
@@ -27,12 +19,9 @@ class Node:
 		self.value = value
 	
 	def merge(self, branch):
-#		print "branch --> ", branch
 		if branch:
 			triple = branch[0]
 			signal = triple[0]
-#			node = Node(value)
-
 			if signal == "=":
 				value = str(triple[1])
 				self.value = value
@@ -47,7 +36,6 @@ class Node:
 				if (self.right == None):
 					self.right = Node(None)
 				self.right.merge(branch[1:])
-
 		return self
 
 	def tree(self, i):
@@ -77,10 +65,6 @@ def make(root, branch):
 		
 
 def maketree(branches):
-#    print ""
-#    print branches
-#    print ""
-
     root = Node(None)
     for branch in branches:
 			root = make(root, branch)
@@ -92,10 +76,9 @@ def roads(defaultList, al):
 	for p in itertools.permutations(defaultList):
 		permutation = list(p)
 		z = ""
-#		print "p ", permutation
 		for j in range(len(defaultList)):
 			z += str(permutation.index(j))
-			
+		
 		branch = list(permutation)
 		compareList = globals()[al](permutation)
 		d = []
@@ -121,7 +104,6 @@ def main(argv):
 	
 	l = range(0, n)
 	r = roads(l, a)
-#	print "roads ", r
 
 	print ""	
 	t = maketree(r)

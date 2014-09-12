@@ -1,16 +1,7 @@
 #!/usr/bin/env python
 #
 # Author:	Felipe Pierin
-# Title:	Selecion Sort
-#
-# Statement:
-# Given a disordered list of integers rearrange it in natural order.
-#
-# Time complexity of solution:
-# 
-# Best		-> O(n^2)
-# Average	-> O(n^2)
-# Worst		-> O(n^2)
+# Author:	Viviane Bonadia
 
 from compare import cmp
 
